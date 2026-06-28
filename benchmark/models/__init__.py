@@ -1,13 +1,11 @@
 from benchmark.models.unlimited_ocr import UnlimitedOCRModel
 from benchmark.models.paddleocr_runner import PaddleOCRModel
 from benchmark.models.easyocr_runner import EasyOCRModel
-from benchmark.models.winocr_runner import WinOCRModel
 
 MODEL_REGISTRY: dict[str, type] = {
     "unlimited_ocr": UnlimitedOCRModel,
     "paddleocr": PaddleOCRModel,
     "easyocr": EasyOCRModel,
-    "winocr": WinOCRModel,
 }
 
 

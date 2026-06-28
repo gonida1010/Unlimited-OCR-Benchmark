@@ -12,12 +12,11 @@ pymupdf
 addict
 easydict
 einops
+matplotlib
 
 # PaddleOCR
+paddlepaddle
 paddleocr>=3.0
 
 # EasyOCR
 easyocr
-
-# WinRT OCR (Windows only)
-winocr

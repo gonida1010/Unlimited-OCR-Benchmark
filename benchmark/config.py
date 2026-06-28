@@ -12,7 +12,7 @@ DATASET_HF_IDS = {
     "iam": "Teklia/IAM-line",
 }
 
-MODEL_NAMES = ["unlimited_ocr", "paddleocr", "easyocr", "winocr"]
+MODEL_NAMES = ["unlimited_ocr", "paddleocr", "easyocr"]
 DATASET_NAMES = ["iiit5k", "icdar2015", "iam"]
 
 
