@@ -15,8 +15,8 @@ einops
 matplotlib
 
 # PaddleOCR
-paddlepaddle
-paddleocr>=3.0
+paddlepaddle==2.6.2
+paddleocr==2.9.1
 
 # EasyOCR
 easyocr

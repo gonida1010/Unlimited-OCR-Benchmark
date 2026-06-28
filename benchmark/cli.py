@@ -28,8 +28,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--max-samples", "-n",
         type=int,
-        default=None,
-        help="Max samples per dataset (for quick testing)",
+        default=500,
+        help="Max samples per dataset (default: 500)",
     )
     parser.add_argument(
         "--output-dir", "-o",

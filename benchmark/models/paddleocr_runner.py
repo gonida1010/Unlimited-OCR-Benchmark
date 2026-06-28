@@ -8,7 +8,7 @@ from benchmark.models.base import BaseOCRModel, OCRResult
 
 class PaddleOCRModel(BaseOCRModel):
     name = "paddleocr"
-    description = "PaddleOCR v3 (detection + recognition, CPU/GPU)"
+    description = "PaddleOCR v2 (detection + recognition, CPU/GPU)"
 
     def __init__(self, lang="en"):
         self.lang = lang
@@ -17,19 +17,19 @@ class PaddleOCRModel(BaseOCRModel):
     def load(self) -> None:
         from paddleocr import PaddleOCR
 
-        self.ocr = PaddleOCR(lang=self.lang)
+        self.ocr = PaddleOCR(use_angle_cls=True, lang=self.lang)
 
     def predict(self, image: Image.Image) -> OCRResult:
         img_array = np.array(image)
 
         t0 = time.perf_counter()
-        results = self.ocr.predict(img_array)
+        results = self.ocr.ocr(img_array, cls=True)
         elapsed = time.perf_counter() - t0
 
         lines = []
-        for res in results:
-            if hasattr(res, "rec_texts") and res.rec_texts:
-                lines.extend(res.rec_texts)
+        if results and results[0]:
+            for line in results[0]:
+                lines.append(line[1][0])
 
         text = " ".join(lines)
         return OCRResult(text=text, inference_time_s=elapsed)

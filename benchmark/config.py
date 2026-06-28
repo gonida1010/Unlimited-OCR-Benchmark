@@ -20,7 +20,7 @@ DATASET_NAMES = ["iiit5k", "icdar2015", "iam"]
 class BenchmarkConfig:
     models: list[str] = field(default_factory=lambda: MODEL_NAMES.copy())
     datasets: list[str] = field(default_factory=lambda: DATASET_NAMES.copy())
-    max_samples: int | None = None
+    max_samples: int | None = 500
     output_dir: Path = field(default_factory=lambda: RESULTS_DIR)
     seed: int = 42
     unlimited_ocr_image_size: int = 640
