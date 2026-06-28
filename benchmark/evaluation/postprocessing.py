@@ -31,4 +31,5 @@ NORMALIZATION_REGISTRY = {
     "iiit5k": normalize_for_word_level,
     "icdar2015": normalize_for_word_level,
     "iam": normalize_for_line_level,
+    "funsd": normalize_for_line_level,
 }

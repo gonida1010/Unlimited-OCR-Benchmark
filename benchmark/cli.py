@@ -35,7 +35,7 @@ def parse_args() -> argparse.Namespace:
         "--output-dir", "-o",
         type=Path,
         default=None,
-        help="Output directory for results",
+        help="Output directory for results (default: outputs/results/<timestamp>)",
     )
     parser.add_argument(
         "--seed",
@@ -62,6 +62,9 @@ def parse_args() -> argparse.Namespace:
 
 
 def main():
+    from datetime import datetime
+    from benchmark.config import RESULTS_DIR
+
     args = parse_args()
 
     logging.basicConfig(
@@ -69,15 +72,20 @@ def main():
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     )
 
+    if args.output_dir:
+        output_dir = args.output_dir
+    else:
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_dir = RESULTS_DIR / timestamp
+
     config = BenchmarkConfig(
         models=args.models,
         datasets=args.datasets,
         max_samples=args.max_samples,
         seed=args.seed,
+        output_dir=output_dir,
         unlimited_ocr_image_size=args.unlimited_ocr_image_size,
         unlimited_ocr_crop_mode=not args.unlimited_ocr_no_crop,
     )
-    if args.output_dir:
-        config.output_dir = args.output_dir
 
     run_benchmark(config)

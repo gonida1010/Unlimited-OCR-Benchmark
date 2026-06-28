@@ -13,7 +13,7 @@ DATASET_HF_IDS = {
 }
 
 MODEL_NAMES = ["unlimited_ocr", "paddleocr", "easyocr"]
-DATASET_NAMES = ["iiit5k", "icdar2015", "iam"]
+DATASET_NAMES = ["funsd"]
 
 
 @dataclass

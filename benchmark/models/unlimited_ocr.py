@@ -1,10 +1,13 @@
 import os
+import re
 import time
 import tempfile
 
 from PIL import Image
 
 from benchmark.models.base import BaseOCRModel, OCRResult
+
+DET_TAG_PATTERN = re.compile(r'<\|[^|]*\|>[^<]*(?:<\|/[^|]*\|>)?')
 
 
 class UnlimitedOCRModel(BaseOCRModel):
@@ -40,7 +43,7 @@ class UnlimitedOCRModel(BaseOCRModel):
 
         try:
             t0 = time.perf_counter()
-            text = self.model.infer(
+            raw = self.model.infer(
                 self.tokenizer,
                 prompt="<image>document parsing.",
                 image_file=tmp_path,
@@ -49,14 +52,17 @@ class UnlimitedOCRModel(BaseOCRModel):
                 image_size=self.image_size,
                 crop_mode=self.crop_mode,
                 eval_mode=True,
-                max_length=4096,
+                max_length=32768,
+                no_repeat_ngram_size=35,
+                ngram_window=128,
                 save_results=False,
             )
             elapsed = time.perf_counter() - t0
         finally:
             os.unlink(tmp_path)
 
-        return OCRResult(text=text or "", inference_time_s=elapsed)
+        text = DET_TAG_PATTERN.sub('', raw or '').strip()
+        return OCRResult(text=text, inference_time_s=elapsed)
 
     def unload(self) -> None:
         import torch
