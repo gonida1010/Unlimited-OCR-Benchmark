@@ -28,10 +28,12 @@ def run_benchmark(config: BenchmarkConfig) -> None:
 
             model_kwargs = {}
             if model_name == "unlimited_ocr":
+                visuals_dir = config.output_dir / "unlimited_ocr_visuals"
                 model_kwargs = {
                     "image_size": config.unlimited_ocr_image_size,
                     "base_size": config.unlimited_ocr_base_size,
                     "crop_mode": config.unlimited_ocr_crop_mode,
+                    "save_visuals_dir": visuals_dir,
                 }
 
             model = get_model(model_name, **model_kwargs)
@@ -44,7 +46,7 @@ def run_benchmark(config: BenchmarkConfig) -> None:
                         total=len(dataset),
                     ):
                         image = preprocess_for_benchmark(sample.image, dataset_name)
-                        result = model.predict(image)
+                        result = model.predict(image, sample_id=sample.sample_id)
 
                         evaluator.add_result(
                             sample_id=sample.sample_id,

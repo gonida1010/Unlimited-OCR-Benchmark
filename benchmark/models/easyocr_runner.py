@@ -20,7 +20,7 @@ class EasyOCRModel(BaseOCRModel):
 
         self.reader = easyocr.Reader(self.languages, gpu=self.gpu)
 
-    def predict(self, image: Image.Image) -> OCRResult:
+    def predict(self, image: Image.Image, sample_id: str = "") -> OCRResult:
         img_array = np.array(image)
 
         t0 = time.perf_counter()

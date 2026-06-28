@@ -19,7 +19,7 @@ class PaddleOCRModel(BaseOCRModel):
 
         self.ocr = PaddleOCR(use_angle_cls=True, lang=self.lang)
 
-    def predict(self, image: Image.Image) -> OCRResult:
+    def predict(self, image: Image.Image, sample_id: str = "") -> OCRResult:
         img_array = np.array(image)
 
         t0 = time.perf_counter()
