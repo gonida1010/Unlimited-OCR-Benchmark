@@ -29,7 +29,7 @@
 |---|---|---|
 | ![GT](assets/funsd_000_gt.png) | ![EasyOCR](assets/funsd_000_easyocr.png) | ![PaddleOCR](assets/funsd_000_paddleocr.png) |
 
-기존 OCR은 텍스트 위치만 찾는다. Unlimited-OCR는 **"이건 헤더다", "이건 표다", "이건 푸터다"**까지 분류한다.
+기존 OCR은 텍스트 위치만 찾는다. Unlimited-OCR는 "이건 헤더다", "이건 표다", "이건 푸터다"까지 분류한다.
 
 ## 활용 가능성
 
